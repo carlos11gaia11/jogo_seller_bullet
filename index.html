@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seller Pro Bullet</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="setupScreen" class="screen active">
+      <div class="select-shell">
+        <header class="select-header">
+          <p class="tag">Jogo online · HTML · CSS · JS · Firebase</p>
+          <h1>Seller Pro Bullet</h1>
+          <p class="subtitle">
+            Selecione seu lutador, entre em uma sala online e vença pela pontuação.
+            A partida dura <strong>5 minutos</strong>.
+          </p>
+        </header>
+
+        <section class="fighter-select">
+          <aside class="fighter-preview">
+            <p class="tag">Selecionado</p>
+            <div class="preview-card">
+              <img id="selectedPreview" src="assets/player_blue.png" alt="Personagem selecionado" />
+            </div>
+
+            <h2 id="selectedName">Ninja Azul</h2>
+            <p id="selectedSkill" class="skill-text">Equilibrado, bom para começar.</p>
+
+            <div class="stats">
+              <div><span>Vida</span><strong id="statHp">5</strong></div>
+              <div><span>Velocidade</span><strong id="statSpeed">4.4</strong></div>
+              <div><span>Cadência</span><strong id="statCooldown">260ms</strong></div>
+              <div><span>Dano</span><strong id="statDamage">1</strong></div>
+            </div>
+          </aside>
+
+          <section class="roster-area">
+            <div class="versus">VS</div>
+            <h2>Seleção de Personagem</h2>
+            <div class="character-grid" id="characterGrid">
+              <button class="character-slot selected" data-character="blue" type="button">
+                <img src="assets/player_blue.png" alt="Gabriel" />
+                <span>Gabriel</span>
+              </button>
+              <button class="character-slot" data-character="red" type="button">
+                <img src="assets/player_red.png" alt="Tanque Vermelho" />
+                <span>Tanque Vermelho</span>
+              </button>
+              <button class="character-slot" data-character="green" type="button">
+                <img src="assets/player_green.png" alt="Soldado Verde" />
+                <span>Soldado Verde</span>
+              </button>
+              <button class="character-slot" data-character="purple" type="button">
+                <img src="assets/player_purple.png" alt="Mago Roxo" />
+                <span>Mago Roxo</span>
+              </button>
+              <button class="character-slot" data-character="yellow" type="button">
+                <img src="assets/player_yellow.png" alt="Robô Amarelo" />
+                <span>Robô Amarelo</span>
+              </button>
+              <button class="character-slot" data-character="black" type="button">
+                <img src="assets/player_black.png" alt="gustavo" />
+                <span>Gustavo</span>
+              </button>
+              <button class="character-slot" data-character="pink" type="button">
+                <img src="assets/player_pink.png" alt="Heroína Rosa" />
+                <span>Heroína Rosa</span>
+              </button>
+              <button class="character-slot" data-character="cyan" type="button">
+                <img src="assets/player_cyan.png" alt="Atirador Ciano" />
+                <span>Atirador Ciano</span>
+              </button>
+            </div>
+          </section>
+
+          <aside class="room-card">
+            <p class="tag">Sala online</p>
+
+            <label>
+              Seu nome
+              <input id="playerName" maxlength="18" placeholder="Ex: Gabriel" />
+            </label>
+
+            <label>
+              Código da sala
+              <div class="inline">
+                <input id="roomCode" maxlength="18" placeholder="Ex: sala01" />
+                <button id="randomRoomBtn" type="button">Gerar</button>
+              </div>
+            </label>
+
+            <button id="enterRoomBtn" class="primary" type="button">Entrar na sala</button>
+
+            <div id="setupError" class="warning hidden"></div>
+
+            <div class="hint">
+              Abra o mesmo código de sala em dois navegadores para testar online.
+            </div>
+          </aside>
+        </section>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <aside class="sidebar">
+        <div>
+          <p class="tag">Sala</p>
+          <h2 id="currentRoom">---</h2>
+          <div id="timer" class="timer">05:00</div>
+        </div>
+
+        <div class="score-card">
+          <h3>Pontuação</h3>
+          <div id="scoreboard" class="scoreboard"></div>
+        </div>
+
+        <div class="buff-card">
+          <h3>Aprimoramentos</h3>
+          <div id="buffList" class="buff-list">Nenhum aprimoramento ativo.</div>
+        </div>
+
+        <div class="controls">
+          <h3>Controles</h3>
+          <p><strong>WASD</strong> ou <strong>setas</strong>: mover</p>
+          <p><strong>Mouse</strong>: mirar</p>
+          <p><strong>Segurar clique</strong> ou <strong>Espaço</strong>: atirar automaticamente pela recarga</p>
+          <p><strong>Q</strong>: habilidade especial do personagem</p>
+          <p><strong>R</strong>: renascer quando estiver morto</p>
+        </div>
+
+        <button id="respawnBtn" class="respawn hidden" type="button">Renascer</button>
+        <button id="leaveRoomBtn" class="secondary" type="button">Sair da sala</button>
+      </aside>
+
+      <section class="arena-wrap">
+        <div id="statusBar" class="status">Aguardando jogadores...</div>
+        <canvas id="gameCanvas" width="1100" height="650"></canvas>
+
+        <div id="endOverlay" class="end-overlay hidden">
+          <div class="end-card">
+            <p class="tag">Fim da partida</p>
+            <h2 id="winnerText">Vencedor</h2>
+            <p id="winnerDetail">Resultado final.</p>
+            <button id="restartRoomBtn" class="primary" type="button">Reiniciar sala</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
