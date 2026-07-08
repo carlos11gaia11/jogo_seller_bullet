@@ -137,7 +137,7 @@ const CHARACTER_DATA = {
   },
   pink: {
     name: "Melissa",
-    image: "assets/player_pink.png",
+    image: "assets/mellissa.png",
     hp: 7,
     speed: 4.7,
     fireCooldown: 250,
