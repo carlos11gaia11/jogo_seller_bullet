@@ -193,7 +193,7 @@ const CHARACTER_DATA = {
   },
   medic: {
     name: "Médica Rubi",
-    image: "assets/player_pink.png",
+    image: "assets/mellissa.png",
     hp: 6,
     speed: 4.3,
     fireCooldown: 285,
