@@ -136,7 +136,7 @@ const CHARACTER_DATA = {
     skill: "Passiva: muito rápido, mas recebe mais dano. Q: atravessa paredes por tempo curto."
   },
   pink: {
-    name: "Heroína Rosa",
+    name: "Melissa",
     image: "assets/player_pink.png",
     hp: 7,
     speed: 4.7,
@@ -220,7 +220,7 @@ const CHARACTER_DATA = {
     skill: "Passiva: inicia com tiros venenosos. Q: ativa veneno nos próximos tiros."
   },
   frost: {
-    name: "Cronos Gélido",
+    name: "Leonardo",
     image: "assets/player_cyan.png",
     hp: 6,
     speed: 3.9,
